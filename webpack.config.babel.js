@@ -23,14 +23,14 @@ module.exports = {
         test: /\.scss$/,
         use: ExtractTextPlugin.extract({
           use: 'css-loader!sass-loader'
-        }),
+        })
       },
       {
         test: /\.js$/,
         loader: 'babel-loader',
         exclude: /node_modules/,
         query: {
-          presets:[ 'es2015', 'react' ]
+          presets: ['es2015', 'react']
         }
       },
       { test: /\.jsx$/,
@@ -44,7 +44,7 @@ module.exports = {
     ]
   },
   devServer: {
-    port,
+    port
   },
   plugins: [HtmlWebpackPluginConfig, new ExtractTextPlugin('dist/bundle.css')]
 };
