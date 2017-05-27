@@ -14,7 +14,6 @@ export default class Layout extends React.Component {
         <br />
         <br />
         <Body />
-        <Footer />
       </div>
     );
   }

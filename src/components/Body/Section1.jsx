@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 
 class SelectNewsSource extends React.Component {
   constructor(props) {
@@ -54,7 +55,6 @@ class SelectSortOrder extends React.Component{
             className="form-control"
             defaultValue={this.state.sort}
             onChange={this.handleChange}
-            className="form-control"
           >
             <option>Top</option>
             <option>Latest</option>
@@ -69,14 +69,19 @@ class SelectSortOrder extends React.Component{
 export default class Section1 extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { source: 'TechCrunch', sort: 'top' };
+    this.state = { source: 'TechCrunch', sort: 'top', info: '' };
     this.newSource = this.newSource.bind(this);
     this.newSort = this.newSort.bind(this);
     this.getLatestNews = this.getLatestNews.bind(this);
   }
   getLatestNews() {
-    console.log(this.state.source);
-    console.log(this.state.sort);
+    axios.get(`https://newsapi.org/v1/articles?source=${this.state.source}&sortBy=${this.state.sort}&apiKey=213327409d384371851777e7c7f78dfe`)
+      .then((response) => {
+        this.setState({ info: response.data });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
   newSource(newState) {
     this.setState({ source: newState });
