@@ -1,70 +1,8 @@
 import React from 'react';
 import axios from 'axios';
+import SelectNewsSource from './SelectNewsSource.jsx';
+import SelectSortOrder from './SelectSortOrder.jsx';
 
-class SelectNewsSource extends React.Component {
-  constructor(props) {
-    super(props);
-    this.handleChange = this.handleChange.bind(this);
-    this.state = { source: 'TechCrunch' };
-  }
-  handleChange(event) {
-    this.setState({
-      source: event.target.value
-    });
-    this.props.getSource(event.target.value);
-  }
-  render() {
-    return (
-      <div className="form-group">
-        <label>Source</label>
-        <div className="col-sm-12">
-          <select
-            defaultValue={this.state.source}
-            onChange={this.handleChange}
-            className="form-control"
-          >
-            <option>TechCrunch</option>
-            <option>Top</option>
-            <option>Latest</option>
-            <option>Popular</option>
-          </select>
-        </div>
-      </div>
-    );
-  }
-}
-
-class SelectSortOrder extends React.Component{
-  constructor(props) {
-    super(props);
-    this.handleChange = this.handleChange.bind(this);
-    this.state = { sort: '' };
-  }
-  handleChange(event) {
-    this.setState({
-      sort: event.target.value
-    });
-    this.props.getSort(event.target.value);
-  }
-  render(){
-    return (
-      <div className="form-group">
-        <label>Priority</label>
-        <div className="col-sm-12">
-          <select
-            className="form-control"
-            defaultValue={this.state.sort}
-            onChange={this.handleChange}
-          >
-            <option>Top</option>
-            <option>Latest</option>
-            <option>Popular</option>
-          </select>
-        </div>
-      </div>
-    );
-  }
-}
 
 export default class Section1 extends React.Component {
   constructor(props) {
@@ -78,6 +16,8 @@ export default class Section1 extends React.Component {
     axios.get(`https://newsapi.org/v1/articles?source=${this.state.source}&sortBy=${this.state.sort}&apiKey=213327409d384371851777e7c7f78dfe`)
       .then((response) => {
         this.setState({ info: response.data });
+        console.log(response.data);
+
       })
       .catch((error) => {
         console.log(error);
@@ -94,10 +34,10 @@ export default class Section1 extends React.Component {
       <div className="container">
         <div className="row text-center">
           <div className="col-md-4">
-            <SelectNewsSource getSource={(newState) => this.newSource(newState)} />
+            <SelectNewsSource getSource={ newState => this.newSource(newState)} />
           </div>
           <div className="col-md-4">
-            <SelectSortOrder getSort={(newState) => this.newSort(newState)} />
+            <SelectSortOrder getSort={ newState => this.newSort(newState)} />
           </div>
           <div className="col-md-4" style={{ marginTop: 20 }}>
             <button onClick={this.getLatestNews} className="btn search-btn"><b>Get News</b></button>
