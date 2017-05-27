@@ -1,8 +1,6 @@
 body{
-  background: whitesmoke;
-  color: #f8f8f8;
+  background: white;
   display: flex;
-  justify-content: center;
   font-family:  -apple-system,
   BlinkMacSystemFont,
   "Segoe UI",
@@ -11,10 +9,26 @@ body{
   Ubuntu,
   Cantarell,
   "Helvetica Neue",
-  sans-serif;;
-}
-
-h1 {
-  text-align: center;
+  sans-serif;
   color: black;
+}
+.navbar{
+  background-color: dodgerblue;
+}
+.navbar-brand{
+  color:white;
+}
+.search-btn{
+  width: 200px;
+  height: 40px;
+  border: 1px solid dodgerblue;
+  background-color: white;
+  color: black;
+}
+.search-btn:hover{
+  background-color: grey;
+  color:white;
+}
+.col-md-4{
+  text-align: center;
 }
