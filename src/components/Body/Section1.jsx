@@ -13,6 +13,7 @@ export default class Section1 extends React.Component {
     this.newSort = this.newSort.bind(this);
     this.getLatestNews = this.getLatestNews.bind(this);
   }
+
   getLatestNews() {
     axios.get(`https://newsapi.org/v1/articles?source=${this.state.source}&sortBy=${this.state.sort}&apiKey=213327409d384371851777e7c7f78dfe`)
       .then((response) => {

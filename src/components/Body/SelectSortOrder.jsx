@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default class SelectSortOrder extends React.Component{
+export default class SelectSortOrder extends React.Component {
   constructor(props) {
     super(props);
     this.handleChange = this.handleChange.bind(this);
