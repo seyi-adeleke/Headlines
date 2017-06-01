@@ -4,6 +4,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const port = process.env.PORT || 3000;
 const outputPath = path.join(__dirname, 'dist');
+const Dotenv = require('dotenv-webpack');
 
 const HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
   template: './src/index.html',
@@ -37,7 +38,7 @@ module.exports = {
         loader: 'babel-loader',
         exclude: /node_modules/,
         query: {
-          presets:[ 'es2015', 'react' ]
+          presets: ['es2015', 'react']
         }
       }
 
@@ -46,6 +47,8 @@ module.exports = {
   devServer: {
     port
   },
-  plugins: [HtmlWebpackPluginConfig, new ExtractTextPlugin('dist/bundle.css')]
+  plugins: [HtmlWebpackPluginConfig,
+    new ExtractTextPlugin('dist/bundle.css')
+  ]
 };
 
