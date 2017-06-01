@@ -1,11 +1,11 @@
 import AppDispatcher from '../dispatcher';
 import Constants from '../constants/constants';
 
-module.exports = {
-  receiveArticle: function (response) {
+export default {
+  receiveArticle(response) {
     AppDispatcher.handleServerAction({
-      actionType: Constants.NEW_ARTICLE,
-      response: response
+      actionType: Constants.NEW_NEWS,
+      response
     });
   }
 };
