@@ -14,7 +14,7 @@ class Login extends React.Component {
   googleResponse(response) {
     const user = response.profileObj;
     if (response) {
-      localStorage.setItem('jwtToken', 'token');
+      localStorage.setItem('jwtToken', 'user');
       this.setState({
         credentials: {
           email: user.email,
@@ -29,7 +29,6 @@ class Login extends React.Component {
   render() {
     return (
       <div>
-        <p>{this.state.credentials.name}</p>
         <form>
           <div className="text-center">
             <div className="text-center">
