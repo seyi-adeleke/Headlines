@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router';
 
 export default class Nav extends React.Component {
   constructor(props) {
@@ -10,9 +9,10 @@ export default class Nav extends React.Component {
     this.checkToken = this.checkToken.bind(this);
   }
   checkToken() {
-    let Token = localStorage.getItem('jwtToken');
-    if (Token) {
-      Token = null;
+    const Token =  localStorage.getItem('jwtToken');
+    if (Token === 'user') {
+      localStorage.setItem('jwtToken', 'no-user');
+      window.location = '/#/';
       this.setState({
         token: false
       });
@@ -20,6 +20,7 @@ export default class Nav extends React.Component {
       this.setState({
         token: true
       });
+      alert('only signed in users can log out');
     }
   }
   render() {
@@ -33,7 +34,8 @@ export default class Nav extends React.Component {
             <div className="collapse navbar-collapse" id="navbar">
               <form>
                 <ul className="nav navbar-nav navbar-right">
-                  <li onClick={this.checkToken}><Link to="/">Log Out</Link></li>
+                  <li onClick={this.checkToken}><a className="navbar-brand" >
+                    <b>Log Out</b></a></li>
                 </ul>
               </form>
             </div>
