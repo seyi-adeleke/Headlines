@@ -9,10 +9,15 @@ import './style.scss';
 
 const root = document.getElementById('root');
 
+const NotFound = () => (
+  <h1>404.. This page is not found!</h1>);
+
+
 ReactDOM.render(
   <Router history={hashHistory}>
     <Route path="/" component={Layout} >
       <Route path="sources" component={Body} />
+      <Route path="*" component={NotFound} />
       <IndexRoute component={HomePage} />
     </Route>
   </Router>,
