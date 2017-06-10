@@ -2,8 +2,8 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
-const port = process.env.PORT || 3000;
 const outputPath = path.join(__dirname, 'dist');
+process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 
 const HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
   template: './src/index.html',
@@ -12,6 +12,7 @@ const HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
 });
 
 module.exports = {
+  devtool: process.env.NODE_ENV === 'production' ? undefined : 'cheap-module-eval-source-map',
   entry: './src/index.jsx',
   output: {
     path: outputPath,
@@ -43,11 +44,7 @@ module.exports = {
 
     ],
   },
-  devServer: {
-    port,
-  },
   plugins: [HtmlWebpackPluginConfig,
     new ExtractTextPlugin('dist/bundle.css'),
   ],
 };
-

@@ -14,7 +14,7 @@ const NotFound = () => (
 export default class Root extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {info:null}
+    this.state = { info: null }
     this.onChange = this.onChange.bind(this);
     this.checkUserState = this.checkUserState.bind(this);
     this.noAuth = this.noAuth.bind(this);

@@ -7,6 +7,7 @@ import HomePage from './components/HomePage.jsx'
 import Root from './root.jsx';
 
 import './style.scss';
+
 const rootEl = document.getElementById('root');
 
 ReactDOM.render(<Root />, rootEl);
