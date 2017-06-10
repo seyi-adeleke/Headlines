@@ -11,6 +11,6 @@ export default {
         }
         return ActionServer.receiveArticle(response.body);
       });
-  }
+  },
 };
 
