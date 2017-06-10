@@ -4,23 +4,23 @@ import Constants from '../constants/constants';
 
 const EventEmitter = require('events').EventEmitter;
 
-
 const CHANGE_EVENT = 'change';
 
 const store = {
-  list: null,
+  user: null,
 };
 
-
-const ArticleStore = ObjectAssign({}, EventEmitter.prototype, {
-
+const AuthStore = ObjectAssign({}, EventEmitter.prototype, {
   addChangeListener(cb) {
     this.on(CHANGE_EVENT, cb);
   },
   removeChangeListener(cb) {
     this.removeListener(CHANGE_EVENT, cb);
   },
-  getList() {
+  getUser() {
+    return store;
+  },
+  removeUser() {
     return store;
   },
 });
@@ -28,15 +28,21 @@ const ArticleStore = ObjectAssign({}, EventEmitter.prototype, {
 AppDispatcher.register((payload) => {
   const action = payload.action;
   switch (action.actionType) {
-    case Constants.NEW_NEWS:
-      const newArticle = action.response;
-      store.list = newArticle;
-      ArticleStore.emit(CHANGE_EVENT);
+    case Constants.AUTH:
+      const newUser = action;
+      store.user = newUser;
+      AuthStore.emit(CHANGE_EVENT);
       break;
-
+    case Constants.LOGOUT:
+      window.location = '/';
+      if (action) {
+        store.user = null;
+        AuthStore.emit(CHANGE_EVENT);
+      }
+      break;
     default:
       return true;
   }
 });
 
-export default ArticleStore;
+export default AuthStore;

@@ -1,27 +1,28 @@
 import React from 'react';
+import store from '../../store/authStore.js';
+import action from '../../Actions/action-logout.js';
+
 
 export default class Nav extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      token: false
+      user: false,
     };
-    this.checkToken = this.checkToken.bind(this);
-  }
-  checkToken() {
-    const Token =  localStorage.getItem('jwtToken');
-    if (Token === 'user') {
-      localStorage.setItem('jwtToken', 'no-user');
-      window.location = '/#/';
-      this.setState({
-        token: false
-      });
-    } else {
-      this.setState({
-        token: true
-      });
-      alert('only signed in users can log out');
+    this.onChange = this.onChange.bind(this);
+    this.logUserOut = this.logUserOut.bind(this);
     }
+  componentDidMount() {
+    store.addChangeListener(this.onChange);
+  }
+  componentDidUnMount(){
+    store.removeChangeListener(this.onChange);
+  }
+  onChange() {
+    this.setState({ user: true});
+  }
+  logUserOut() {
+    action.logout(this.state.user);
   }
   render() {
     return (
@@ -33,10 +34,11 @@ export default class Nav extends React.Component {
             </div>
             <div className="collapse navbar-collapse" id="navbar">
               <form>
-                <ul className="nav navbar-nav navbar-right">
-                  <li onClick={this.checkToken}><a className="navbar-brand" >
+              {this.state.user ? <ul className="nav navbar-nav navbar-right">
+                        <li onClick={this.logUserOut}><a className="navbar-brand" >
                     <b>Log Out</b></a></li>
                 </ul>
+                 :null}
               </form>
             </div>
           </div>

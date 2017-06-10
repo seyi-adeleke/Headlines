@@ -6,7 +6,7 @@ export default{
   receiveArticle(source, sort) {
     ArticlesApi.get(source, sort);
     AppDispatcher.handleViewAction({
-      actionType: Constants.NEW_NEWS
+      actionType: Constants.NEW_NEWS,
     });
-  }
+  },
 };

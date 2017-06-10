@@ -4,51 +4,50 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const port = process.env.PORT || 3000;
 const outputPath = path.join(__dirname, 'dist');
-const Dotenv = require('dotenv-webpack');
 
 const HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
   template: './src/index.html',
   filename: 'index.html',
-  inject: 'body'
+  inject: 'body',
 });
 
 module.exports = {
   entry: './src/index.jsx',
   output: {
     path: outputPath,
-    filename: 'dist/bundle.js'
+    filename: 'dist/bundle.js',
   },
   module: {
     loaders: [
       {
         test: /\.scss$/,
         use: ExtractTextPlugin.extract({
-          use: 'css-loader!sass-loader'
-        })
+          use: 'css-loader!sass-loader',
+        }),
       },
       {
         test: /\.js$/,
         loader: 'babel-loader',
         exclude: /node_modules/,
         query: {
-          presets: ['es2015', 'react']
-        }
+          presets: ['es2015', 'react'],
+        },
       },
       { test: /\.jsx$/,
         loader: 'babel-loader',
         exclude: /node_modules/,
         query: {
-          presets: ['es2015', 'react']
-        }
-      }
+          presets: ['es2015', 'react'],
+        },
+      },
 
-    ]
+    ],
   },
   devServer: {
-    port
+    port,
   },
   plugins: [HtmlWebpackPluginConfig,
-    new ExtractTextPlugin('dist/bundle.css')
-  ]
+    new ExtractTextPlugin('dist/bundle.css'),
+  ],
 };
 

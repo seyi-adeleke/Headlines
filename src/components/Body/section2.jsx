@@ -9,7 +9,7 @@ export default class Section2 extends React.Component {
   render() {
     const obj = this.props.data.list;
     const sourceName = obj.source;
-    const sourceData = obj.articles;
+    const sourceData = this.props.data.list.articles;
     return (
       <div className="container">
         <hr />
@@ -25,7 +25,7 @@ export default class Section2 extends React.Component {
                 <table className="table table-striped table-bordered table-list">
                   <thead>
                     <tr>
-                      <th><i className="fa-3x fa fa-photo" /></th>
+                      <th><i className="fa-2x fa fa-photo" /></th>
                       <th>Author</th>
                       <th>Title</th>
                       <th>Description</th>
@@ -34,19 +34,20 @@ export default class Section2 extends React.Component {
                   </thead>
                   <tbody>
                     {
+                     
                     Object.keys(sourceData).map(key =>
                     <tr>
                       <td>
-                        <img
+                        <img key={[0]}
                           alt="Not Available"
-                          style={{ width: 105 }}
+                          style={{ width: 305 }}
                           src={(sourceData[key].urlToImage)}
                         />
                       </td>
-                      <td>{(sourceData[key].author)}</td>
-                      <td>{(sourceData[key].title)}</td>
-                      <td>{(sourceData[key].description)}</td>
-                      <td><a rel="noopener noreferrer" target="_blank" href={(sourceData[key].url)}>
+                      <td key={[1]}>{(sourceData[key].author)}</td>
+                      <td key={[2]}>{(sourceData[key].title)}</td>
+                      <td key={[3]}>{(sourceData[key].description)}</td>
+                      <td key={[4]}><a rel="noopener noreferrer" target="_blank" href={(sourceData[key].url)}>
                         Go To Article
                       </a>
                       </td>

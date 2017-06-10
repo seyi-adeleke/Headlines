@@ -5,7 +5,7 @@ export default {
   receiveArticle(response) {
     AppDispatcher.handleServerAction({
       actionType: Constants.NEW_NEWS,
-      response
+      response,
     });
-  }
+  },
 };

@@ -1,12 +1,32 @@
 import React from 'react';
+import request from 'superagent';
+import Sources from '../../utils/SourcesApi.js';
+
 
 export default class SelectNewsSource extends React.Component {
   constructor(props) {
     super(props);
     this.handleChange = this.handleChange.bind(this);
-    this.state = { source: 'TechCrunch' };
+    this.state = { source: '', newsSources:[]};
   }
+  componentDidMount() {
+   this.serverRequest = request.get('https://newsapi.org/v1/sources?language=en')
+    .end((error, response) => {
+      if (error) {
+        return error;
+      }
+      this.setState({
+        newsSources: response.body.sources,
+        source : response.body.sources[0].id
+      })
+    });
+  }
+  componentWillUnmount() {
+    this.serverRequest.abort();
+  }
+
   handleChange(event) {
+    console.log(event.target.value)
     this.setState({
       source: event.target.value
     });
@@ -18,31 +38,15 @@ export default class SelectNewsSource extends React.Component {
         <label>Source</label>
         <div className="col-sm-12">
           <select
-            defaultValue={this.state.source}
+            defaultValue={this.state.source} 
             onChange={this.handleChange}
             className="form-control"
           >
-            <option>Associated-Press</option>
-            <option>Bbc-News</option>
-            <option>Bloomberg</option>
-            <option>Business-Insider</option>
-            <option>CNN</option>
-            <option>Engadget</option>
-            <option>Espn</option>
-            <option>Fortune</option>
-            <option>Independent</option>
-            <option>Ign</option>
-            <option>Mashable</option>
-            <option>Metro</option>
-            <option>Mirror</option>
-            <option>Newsweek</option>
-            <option>Polygon</option>
-            <option>Recode</option>
-            <option>Reuters</option>
-            <option>TalkSport</option>
-            <option>TechCrunch</option>
-            <option>TechRadar</option>
-            <option>Time</option>
+            {this.state.newsSources.map(function(sources) {
+          return (
+           <option key={sources.id} value={sources.id}> {sources.name} </option>
+          );
+        })}
           </select>
         </div>
       </div>

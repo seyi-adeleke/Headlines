@@ -4,22 +4,9 @@ import { Route, Router, IndexRoute, hashHistory } from 'react-router';
 import Layout from './components/Layout.jsx';
 import Body from './components/Body.jsx'
 import HomePage from './components/HomePage.jsx'
+import Root from './root.jsx';
 
 import './style.scss';
+const rootEl = document.getElementById('root');
 
-const root = document.getElementById('root');
-
-const NotFound = () => (
-  <h1>404.. This page is not found!</h1>);
-
-
-ReactDOM.render(
-  <Router history={hashHistory}>
-    <Route path="/" component={Layout} >
-      <Route path="sources" component={Body} />
-      <Route path="*" component={NotFound} />
-      <IndexRoute component={HomePage} />
-    </Route>
-  </Router>,
-  root
-);
+ReactDOM.render(<Root />, rootEl);
